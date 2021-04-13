@@ -145,8 +145,19 @@ dmypy.json
 
 .mypy_cache
 
-# папки со статикой и медиа
-static/
-posts/static/
+# Media warehouses
+.static
+.posts/static
 media/
+posts/media/
 
+# Coverage tests
+htmlcov/
+.coverage
+.coverage.*
+coverage.xml
+*.cover
+
+# Temprory files
+tmp*
+.tmp
