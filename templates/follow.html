@@ -5,12 +5,12 @@
 {% block content %}
 
   <div class="container">
-    {% include "menu.html" with index=True %}
+    {% include "include/menu.html" with follow=True %}
     {% for post in page %}
-      {% include "post_item.html" with post=post %}
+      {% include "include/post_item.html" with post=post %}
     {% endfor %}
     {% if page.has_other_pages %}
-      {% include "paginator.html" with items=page paginator=paginator%}
+      {% include "include/paginator.html" with items=page paginator=paginator%}
     {% endif %}
   </div>
     

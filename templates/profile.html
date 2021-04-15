@@ -5,13 +5,15 @@
 <main role="main" class="container">
   <div class="row">
     <div class="col-md-3 mb-3 mt-1">
-      {% include 'author_item.html' with author=author %}
+      {% include 'include/author_item.html' with author=author %}
     </div>
     <div class="col-md-9">
       {% for post in page %}
-        {% include 'post_item.html' with post=post %}
+        {% include 'include/post_item.html' with post=post %}
       {% endfor %}
-      {% include 'paginator.html' %}
+      {% if page.has_other_pages %}
+        {% include "include/paginator.html" with items=page paginator=paginator%}
+      {% endif %}
     </div>
   </div>
 </main>

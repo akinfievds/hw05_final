@@ -1,32 +1,22 @@
 <!doctype html>
 <html>
-
-<head>
+  <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>
-      {% block title %}
-        Yatube | The Social Network
-      {% endblock %}
-    </title>
-    <!-- Загрузка статики -->
+    <title>{% block title %}Yatube | The Social Network{% endblock %}</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'bootstrap/dist/css/bootstrap.min.css' %}">
     <script src="{% static 'jquery/dist/jquery.min.js' %}"></script>
     <script src="{% static 'bootstrap/dist/js/bootstrap.min.js' %}"></script>
-</head>
-
-<body>
-  {% include 'nav.html' %}
+  </head>
+  <body>
     <main>
+      {% include 'include/nav.html' %}
       <div class="container">
         <h1>{% block header %}Yatube | The Social Network{% endblock %}</h1>
-            {% block content %}
-            <!-- Содержимое страницы -->
-            {% endblock %}
-        </div>
+        {% block content %}{% endblock %}
+      </div>
+      {% include 'include/footer.html' %}
     </main>
-    {% include 'footer.html' %}
-</body>
-
+  </body>
 </html>

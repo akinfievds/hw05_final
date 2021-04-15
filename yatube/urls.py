@@ -4,8 +4,8 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
 
-handler404 = "posts.views.page_not_found"
-handler500 = "posts.views.server_error"
+handler404 = 'posts.views.page_not_found'
+handler500 = 'posts.views.server_error'
 
 urlpatterns = [
     path('auth/',
