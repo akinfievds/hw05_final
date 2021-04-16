@@ -5,10 +5,10 @@
   <main role="main" class="container">
     <div class="row">
       <div class="col-md-3 mb-3 mt-1">
-        {% include 'include/author_item.html' with author=author %}
+        {% include 'include/author_item.html' with author=post.author is_author=is_author %}
       </div>
       <div class="col-md-9">
-        {% include 'include/post_item.html' with post=post comments_button=comments_button %}
+        {% include 'include/post_item.html' with post=post is_post=is_post %}
         {% include "include/comments.html" with post=post %}
       </div>
     </div>

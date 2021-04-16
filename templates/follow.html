@@ -1,9 +1,6 @@
 {% extends "base.html" %} 
-
 {% block title %} Записи избранных авторов {% endblock %}
-
 {% block content %}
-
   <div class="container">
     {% include "include/menu.html" with follow=True %}
     {% for post in page %}
@@ -13,5 +10,4 @@
       {% include "include/paginator.html" with items=page paginator=paginator%}
     {% endif %}
   </div>
-    
 {% endblock %}

@@ -40,6 +40,9 @@ def new_post(request):
 def profile(request, username):
     author = get_object_or_404(User, username=username)
     posts = author.posts.all()
+    is_author = False
+    if author == request.user:
+        is_author = True
     paginator = Paginator(posts, PAGE_POSTS_COUNT)
     page_number = request.GET.get('page')
     page = paginator.get_page(page_number)
@@ -47,28 +50,40 @@ def profile(request, username):
         request.user.is_authenticated
         and Follow.objects.filter(user=request.user, author=author)
     )
-    context = {'author': author, 'page': page, 'following': following}
+    context = {
+        'author': author,
+        'page': page,
+        'following': following,
+        'is_author': is_author
+    }
     return render(request, 'profile.html', context)
 
 
 def post_view(request, username, post_id):
     post = get_object_or_404(Post, author__username=username, id=post_id)
-    if request.method == 'POST' and request.user.is_authenticated:
-        form = CommentForm(request.POST)
-        if form.is_valid():
-            new_comment = form.save(commit=False)
-            new_comment.author = request.user
-            new_comment.post = post
-            new_comment.save()
-    form = CommentForm()
+    is_author = False
+    if post.author == request.user:
+        is_author = True
+    form = CommentForm(request.POST or None)
+    if form.is_valid():
+        new_comment = form.save(commit=False)
+        new_comment.author = request.user
+        new_comment.post = post
+        new_comment.save()
+        return redirect('post', username=username, post_id=post.id)
     comments = post.comments.all()
-    comments_button = True
+    is_post = True
+    following = (
+        request.user.is_authenticated
+        and Follow.objects.filter(user=request.user, author=post.author)
+    )
     context = {
         'post': post,
-        'author': post.author,
         'form': form,
+        'following': following,
         'comments': comments,
-        'comments_button': comments_button
+        'is_post': is_post,
+        'is_author': is_author,
     }
     return render(request, 'post.html', context)
 

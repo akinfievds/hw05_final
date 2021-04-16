@@ -10,7 +10,7 @@
     <li class="list-group-item">
       <div class="h6 text-muted">Записей: {{ author.posts.count }}</div>
     <li class="list-group-item">
-      {% if author != request.user and user.is_authenticated %}
+      {% if not is_author and request.user.is_authenticated %}
         {% if following %}
           <a class="btn btn-lg btn-light" href="{% url 'profile_unfollow' author.username %}" role="button">Отписаться</a> 
         {% else %}

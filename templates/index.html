@@ -1,9 +1,7 @@
 {% extends "base.html" %} 
-
-{% block title %} Последние обновления {% endblock %}
-
+{% block title %}Последние обновления{% endblock %}
+{% block header %}Последние обновления{% endblock %}
 {% block content %}
-
   <div class="container">
     {% include "include/menu.html" with index=True %}
     {% load cache %}
@@ -15,6 +13,5 @@
     {% if page.has_other_pages %}
       {% include "include/paginator.html" with items=page paginator=paginator%}
     {% endif %}
-  </div>
-    
+  </div>    
 {% endblock %}
