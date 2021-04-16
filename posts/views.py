@@ -70,7 +70,7 @@ def post_view(request, username, post_id):
         new_comment.author = request.user
         new_comment.post = post
         new_comment.save()
-        return redirect('post', username=username, post_id=post.id)
+        return redirect('post', username=username, post_id=post_id)
     comments = post.comments.all()
     is_post = True
     following = (
