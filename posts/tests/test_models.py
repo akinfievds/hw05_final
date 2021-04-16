@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from posts.models import Group, Post, User
+from posts.models import Group
 
 USER_USERNAME = 'Andrey'
 USER_PASSWORD = 'qwerty'
@@ -25,13 +25,3 @@ class GroupModelTest(TestCase):
     def test_object_str_name(self):
         """___str___ модели Post совпадает с ожидаемым """
         self.assertEquals(GROUP_TITLE, str(self.group))
-
-
-class PostModelTest(TestCase):
-    def test_object_str_length(self):
-        """Метод __str__  модели Post = первые 15 символов текста заметки"""
-        user = User.objects.create(
-            username=USER_USERNAME, password=USER_PASSWORD)
-        post = Post.objects.create(text=POST_TEXT, author=user)
-        self.assertEqual(str(post), POST_TEXT[:15])
-        self.assertLessEqual(len(str(post)), 15)

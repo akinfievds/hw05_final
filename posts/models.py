@@ -1,3 +1,5 @@
+import textwrap
+
 from django.contrib.auth import get_user_model
 from django.db import models
 
@@ -62,7 +64,14 @@ class Post(models.Model):
         )
 
     def __str__(self):
-        return self.text[:15]
+        formatted_text = textwrap.shorten(self.text, 15)
+        return (
+            'Запись: '
+            f'Автор: {self.author}, '
+            f'Сообщество: {self.group}, '
+            f'Дата публикации: {self.pub_date.date()}, '
+            f'Текст: {formatted_text}'
+        )
 
 
 class Comment(models.Model):
